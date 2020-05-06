@@ -1,0 +1,36 @@
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.00s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.16s).
+Accumulating evaluation results...
+DONE (t=0.08s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.006
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.023
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.002
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.017
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.027
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.031
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.031
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.051
+IOU for object pig: 0.42012773121911673
+IOU for object nerf: 0.5242933105651797
+IOU for object fuse: 0.38036486166039485
+IOU for object stand: 0.03625116079381097
+IOU for object catan: 0.564571931728772
+IOU for object vader: 0.10537104165065743
+IOU for object router: 0.3470451176779809
+IOU for object cardboard: 0.41517794002505215
+IOU for object glasses: 0.4344770139017016
+IOU for object brush: 0.11089919370342854
+Total IOU: 0.3494120027370533
