@@ -20,8 +20,9 @@ def registerGroundTruth(truth):
     #global modelOneClass
     global modelOneClasses
     global histograms
+    global kernel
     #model = svm.LinearSVC(max_iter=10000)
-    model = svm.NuSVC()
+    model = svm.NuSVC(kernel=kernel)
     #model = svm.NuSVC(kernel='sigmoid')
     #modelOneClass = svm.OneClassSVM(gamma='auto', kernel='sigmoid')
     #modelOneClass = svm.OneClassSVM(kernel='sigmoid')

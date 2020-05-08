@@ -9,16 +9,30 @@ import os
 import multiprocessing
 
 import argparse
+
+def str2bool(v):
+    if isinstance(v, bool):
+       return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
 parser = argparse.ArgumentParser()
 parser.add_argument('train', help='directory containing training clutter data')
 parser.add_argument('clutter', help='directory containing testing clutter data')
 parser.add_argument('out', help='directory to record output')
 parser.add_argument('--cutoff', '-c', help='confidence cutoff', default=0.15, type=float)
 parser.add_argument('--lbp', help='lbp params index (0 to 3)', default=4, type=int)
+parser.add_argument('--kernel', help='kernel to use', choices=('rbf', 'sigmoid', 'poly', 'linear'), default='rbf')
+parser.add_argument('--parallel', help='use parallelism for inference', default=True, type=str2bool)
 args = parser.parse_args()
 
 # Initialize a few parameters
 histogram.lbpIndex = args.lbp
+histogram.kernel = args.kernel
 windowDim = 100
 span = int(windowDim / 2)
 cutoff = args.cutoff
@@ -201,5 +215,9 @@ def processFile(clutterFile):
 if not os.path.exists(args.out):
     os.makedirs(args.out)
 clutterPath = Path(args.clutter)
-with multiprocessing.Pool(multiprocessing.cpu_count()) as p:
-    p.map(processFile, clutterPath.glob('*.jpg'))
+if args.parallel:
+    with multiprocessing.Pool(multiprocessing.cpu_count()) as p:
+        p.map(processFile, clutterPath.glob('*.jpg'))
+else:
+    for fname in clutterPath.glob('*.jpg'):
+        processFile(fname)

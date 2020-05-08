@@ -14,8 +14,8 @@ for line in lines[1:]:
     if not line:
         continue
     elements = [elem for elem in line.split(', ')]
-    #elements[1] = int(elements[1])
-    elements[3] = float(elements[3])
+    for i in range(4, len(elements)):
+        elements[i] = float(elements[i])
     for item, element in zip(header, elements):
         data[item].append(element)
 
@@ -29,13 +29,19 @@ def getEquals(dat, key, value):
                 toRet[item].append(dat[item][i])
     return toRet
 
+def cvtMap(dat, key, mapping):
+    for i, val in enumerate(dat[key]):
+        if val in mapping:
+            dat[key][i] = mapping[val]
+
 plt.figure()
-dat = getEquals(data, 'lbp', '4')
+dat = getEquals(data, 'lbp', '0')
+dat = getEquals(dat, 'objects-clutter', 'all-all')
 datValidate = getEquals(dat, 'test', 'validate')
 datTest = getEquals(dat, 'test', 'test')
 plt.bar(datValidate['kernel'], datValidate['iou'], label='Validate IoU')
 plt.bar(datTest['kernel'], datTest['iou'], label='Test IoU')
-plt.legend(loc='upper right')
+plt.legend(loc='upper left')
 plt.xlabel('Kernel')
 plt.ylabel('IoU')
 plt.title('Validation and Test IoU by Kernel')
@@ -44,6 +50,8 @@ plt.savefig('plots/kernelIoU.png')
 
 plt.figure()
 dat = getEquals(data, 'kernel', 'rbf')
+dat = getEquals(dat, 'objects-clutter', 'all-all')
+cvtMap(dat, 'lbp', {'0': '-(24, 8)', '1': '-(16, 4)', '2': '-(12, 2)', '3': '-(8, 1)', '4': '(full)'})
 datValidate = getEquals(dat, 'test', 'validate')
 datTest = getEquals(dat, 'test', 'test')
 plt.bar(datValidate['lbp'], datValidate['iou'], label='Validate IoU')
@@ -53,3 +61,16 @@ plt.xlabel('LBP setting')
 plt.ylabel('IoU')
 plt.title('Validation and Test IoU by LBP setting')
 plt.savefig('plots/lbpIoU.png')
+
+plt.figure()
+dat = getEquals(data, 'kernel', 'rbf')
+dat = getEquals(dat, 'lbp', '0')
+datValidate = getEquals(dat, 'test', 'validate')
+datTest = getEquals(dat, 'test', 'test')
+plt.bar(datValidate['objects-clutter'], datValidate['iou'], label='Validate IoU')
+plt.bar(datTest['objects-clutter'], datTest['iou'], label='Test IoU')
+plt.legend(loc='upper left')
+plt.xlabel('Train Source - Inference Source')
+plt.ylabel('IoU')
+plt.title('Validation and Test IoU by Train and Inference Image Source')
+plt.savefig('plots/sourceIoU.png')

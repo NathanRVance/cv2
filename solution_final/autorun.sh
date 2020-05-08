@@ -4,6 +4,8 @@ name=$1
 echo "Running tests $name"
 lbp=$2
 echo "Using lbp setting $lbp"
+kernel=$3
+echo "using kernel $kernel"
 
 
 DIR=/tmp/clutter
@@ -19,7 +21,7 @@ for num in `seq $NUMTRAIN $((NUMTOT-1))`; do
     mv $DIR/train/generated$num.* $DIR/validate
 done
 cp $DIR/train/names.txt $DIR/validate
-./solution.py --lbp $lbp $DIR/train $DIR/validate $DIR/answers
+./solution.py --lbp $lbp --kernel $kernel $DIR/train $DIR/validate $DIR/answers
 ./evaluate.py $DIR/answers $DIR/validate | tee tests/$name-validate.txt
 
 mkdir $DIR/test
@@ -31,5 +33,5 @@ for file in `find $clutterDir | grep json`; do
 done
 cp $DIR/train/names.txt $DIR/test
 ./labelme2coco.py $DIR/test $DIR/test
-./solution.py --lbp $lbp $DIR/train $DIR/test $DIR/testAnswers
+./solution.py --lbp $lbp --kernel $kernel $DIR/train $DIR/test $DIR/testAnswers
 ./evaluate.py $DIR/testAnswers $DIR/test | tee tests/$name-test.txt
