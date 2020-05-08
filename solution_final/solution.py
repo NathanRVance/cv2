@@ -4,7 +4,6 @@ import cv2
 import numpy as np
 from pathlib import Path
 import histogram
-from matplotlib import pyplot as plt
 import os
 import multiprocessing
 

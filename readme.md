@@ -87,7 +87,7 @@ There was further round of tests on completely unknown data, which did not conta
 
 ## Accuracy
 
-The accuracy metric used was IoU. The system achieved an IoU of 10.19%. The breakdown by object is as follows:
+The accuracy metric used was IoU. The system achieved an IoU of 11.58%. The breakdown by object is as follows:
 
 ```
 IOU for object brush: 0.0571806678096284
@@ -116,3 +116,11 @@ The solution, of course, isn't perfect. There were many false positives observed
 Another source of error was the naive way in which detected regions were merged. It was possible, given how merging regions worked, to have significant overlap between the resulting bounding boxes for different objects. This source of error is a result of choosing to use COCO bounding boxes for reporting results. It is possible that creating some sort of hull around identified regions would have resulted in much improved IoU, even if it would have rendered evaluation using the COCO competition software invalid.
 
 Finally, evaluation on the unknown dataset revealed many false positives. This reflects a shortcoming of the confidence reporting, which was done using a Local Outlier Factor model. Perhaps a more sophisticated model would have produced better results, at the cost of more in-depth training.
+
+## Running the Code
+
+The solution was implemented in Python 3.6. I have found that Python 3.7 handles parallelism in such a way that opencv chokes, but the code in demo.py is written such that it won't use parallelism in those contexts.
+
+The project depends on opencv, sklearn, skimage, scipy, and imutils.
+
+To run, simply navigate to the project's directory and execute `./demo.py`. The script will generate the synthetic training data, train the SVMs, infer results on a validation and a test case, and display those results.
