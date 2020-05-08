@@ -30,17 +30,17 @@ echo "Now displaying the images. Press any key to continue."
 mkdir $DIR/test
 clutterDir=`grep 'clutter:' conf.yaml | awk '{print $2}'`
 for file in `find $clutterDir | grep json`; do
-    jpg="`cut -d'.' -f1 <<< $file`.jpg"
+    jpg="`rev <<< $file | cut -d'.' -f2 | rev`.jpg"
     cp $file $DIR/test
     cp $jpg $DIR/test
     break
 done
 cp $DIR/train/names.txt $DIR/test
-./labelme2coco.py $DIR/test $DIR/test
+./solution_final/labelme2coco.py $DIR/test $DIR/test
 
 echo "Now calculating bounding boxes for 1 test image"
-./solution.py --parallel False $DIR/train $DIR/test $DIR/testAnswers
-./evaluate.py $DIR/testAnswers $DIR/test
+./solution_final/solution.py --parallel False $DIR/train $DIR/test $DIR/testAnswers
+./solution_final/evaluate.py $DIR/testAnswers $DIR/test
 
 echo "Now displaying the images. Press any key to continue."
 ./solution_final/visualize.py $DIR/testAnswers $DIR/test
