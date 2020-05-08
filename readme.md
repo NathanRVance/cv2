@@ -79,7 +79,7 @@ The second round of experiments was to determine the optimal LBP setting. In the
 
 The effect of the image source was also investigated. In this experiment, we train on object images taken with one camera, either the c615 or a mobile phone, and the inference is performed on images taken with the other camera. We find that training on the mobile camera tends to result in a better IoU. Interestingly, whereas the worst validation IoU was with both training and inference with the c615, the worst test IoU was with the mobile camera for training and the c615 for evaluation. This may be because the c615 camera produces less meaningful LBP data due to more blurriness.
 
-[Image source](solution_final/plots/sourceIoU)
+[Image source](solution_final/plots/sourceIoU.png)
 
 There was further round of tests on completely unknown data, which did not contain the objects that the system was trained on. An example result is shown below.
 
