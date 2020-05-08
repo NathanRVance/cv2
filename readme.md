@@ -124,3 +124,7 @@ The solution was implemented in Python 3.6. I have found that Python 3.7 handles
 The project depends on opencv, sklearn, skimage, scipy, and imutils.
 
 To run, simply navigate to the project's directory and execute `./demo.py`. The script will generate the synthetic training data, train the SVMs, infer results on a validation and a test case, and display those results.
+
+## Consent
+
+I have no intention of working for Amazon, and I don't think that it would help me as I work toward my PhD. However, reflective of the MIT license added to this repository, I do give my consent for you to distribute my report, source code, and any comments you would like to add to whomever you choose.
