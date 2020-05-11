@@ -1,6 +1,8 @@
 # Declutterization
 ## Nathan Vance
 
+Note: This code was part of CSE 40536/60536, Spring 2020, University of Notre Dame. The syllabus for that course can be found [here](http://adamczajka.pl/files/Computer-Vision-2-syllabus.pdf). Our industry partner for this course was Amazon Robotics.
+
 There were several questions that this project attempts to answer, copied below for reference:
 
  1. What is the minimum amount of information necessary to robustly identify everyday objects within a tote?
@@ -71,19 +73,19 @@ To evaluate the system, the COCO results were compared with the ground truth usi
 
 The first round of experiments investigated the best kernel for the SVM. The results are shown below. It was found that the RBF kernel outperforms the other evaluated kernels on the validation set, so it was used for further tests.
 
-[SVM kernel](solution_final/plots/kernelIoU.png)
+![SVM kernel](solution_final/plots/kernelIoU.png)
 
 The second round of experiments was to determine the optimal LBP setting. In the plot below, the LBP setting corresponds to the LBP (number of points, radius) pair omitted, where (full) contains all LBP pairs. It was found that removing the setting with 24 points at a radius of 8 pixels produced the best results. This may be because the features at a larger radius were less meaningful due to occlusions.
 
-[LBP setting](solution_final/plots/lbpIoU.png)
+![LBP setting](solution_final/plots/lbpIoU.png)
 
 The effect of the image source was also investigated. In this experiment, we train on object images taken with one camera, either the c615 or a mobile phone, and the inference is performed on images taken with the other camera. We find that training on the mobile camera tends to result in a better IoU. Interestingly, whereas the worst validation IoU was with both training and inference with the c615, the worst test IoU was with the mobile camera for training and the c615 for evaluation. This may be because the c615 camera produces less meaningful LBP data due to more blurriness.
 
-[Image source](solution_final/plots/sourceIoU.png)
+![Image source](solution_final/plots/sourceIoU.png)
 
 There was further round of tests on completely unknown data, which did not contain the objects that the system was trained on. An example result is shown below.
 
-[Test Result](presentation/unknown1.png)
+![Test Result](presentation/unknown1.png)
 
 ## Accuracy
 
